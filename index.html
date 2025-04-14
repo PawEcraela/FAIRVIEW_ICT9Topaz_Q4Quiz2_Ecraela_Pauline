@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Quiz 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <style>
+
+     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+    body {
+      font-family: 'Playfair Display', serif;
+      background-color: #f5f5f5;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #f7bce9;
+      font-weight: bold;
+    }
+
+      .container-subject {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px auto;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .subject-img {
+      max-width: 100px;
+      margin-bottom: 10px;
+    }
+
+    .form-control {
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      background-color: #f7bce9;
+      color: white;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #f2acce;
+      transform: scale(1.1);
+    }
+
+    #instructions {
+      display: none;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #888;
+    }
+  </style>
+</head>
+<body> 
+
+  <h2>Score Analyzer</h2>
+
+  <p onclick="toggleInstructions()">instructions</p>
+
+  <p id="instructions">We will be rating your average score. ◑﹏◐</p>
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="container-subject">
+       <h4>Science</h4>
+       <img class="subject-img" src="Science Icon.png" alt="science icon"><br>
+         <input type="number" id="science" class="form-control" placeholder="Enter Science grade">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="container-subject">
+        <h4>Math</h4>
+          <img class="subject-img" src="Math Icon.png" alt="math icon"><br>
+          <input type="number" id="math" class="form-control" placeholder="Enter Math grade">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="container-subject">
+        <h4>Social Studies</h4>
+          <img class="subject-img" src="Social Studies Icon.png" alt="socialstudies icon"><br>
+        <input type="number" id="socialstudies" class="form-control" placeholder="Enter Social Studies grade">
+        </div>
+      </div>
+     </div>
+
+  <button class="btn btn-block" onclick="getRating()">Get Results</button>
+
+  <footer>
+    Grading Criteria may vary!!
+    <br>
+    Made by Pauline Ecraela from 9T
+  </footer>
+  <footer>
+    <a href="https://docs.google.com/document/d/17vFCxVBAUQz94wKyWccW8t7BJJJMrMMvKB7oHpDU6uw/edit?usp=sharing"> Check References Here </a>
+  </footer>
+
+  <script>
+    function toggleInstructions() {
+      var info = document.getElementById("instructions");
+      if (info.style.display === "none") {
+        info.style.display = "block";
+      } else {
+        info.style.display = "none";
+      }
+    }
+
+    function getRating() {
+      if (
+        document.getElementById("science").value === "" ||
+        document.getElementById("math").value === "" ||
+        document.getElementById("socialstudies").value === ""
+      ) {
+        alert("Please enter EVERY grade");
+        return;
+      }
+
+      var science = Number(document.getElementById("science").value);
+      var math = Number(document.getElementById("math").value);
+      var socialstudies = Number(document.getElementById("socialstudies").value);
+
+      var average = (science + math + socialstudies) / 3;
+      average = Math.round(average * 100) / 100;
+
+      let rating = "";
+
+      switch (true) {
+        case (average >= 94 && average <= 100):
+          rating = "Excellent";
+          break;
+        case (average >= 87 && average <= 93.99):
+          rating = "Above Satisfactory";
+          break;
+        case (average >= 80 && average <= 86.99):
+          rating = "Satisfactory";
+          break;
+        case (average >= 75 && average <= 79.99):
+          rating = "Needs Improvement";
+          break;
+        case (average >= 70 && average <= 74.99):
+          rating = "Poor";
+          break;
+        default:
+          rating = "Invalid input!";
+      }
+
+      alert("Your average is " + average + " - " + rating);
+    }
+  </script>
+</body>
+</html>
